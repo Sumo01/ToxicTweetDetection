@@ -2,10 +2,9 @@ import pandas as pd
 import nltk 
 from nltk import word_tokenize
 from nltk.corpus import stopwords as st
-from xgboost.sklearn import XGBClassifier
-import pickle
-import re
 import string
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing import sequence
 
 is_running_status = False
 
@@ -39,6 +38,13 @@ def clean_tweets(df):
     df=remove_stopwords(df)
     return df
     
+def lstm_process(X):
+    tok=Tokenizer(1000)
+    tok.fit_on_texts(X)
+    seq=tok.texts_to_sequences(X)
+    seq_matrix=sequence.pad_sequences(seq,150)
+    return seq_matrix
+
 
 def process(tweet):
     df=pd.DataFrame({"tweet": tweet}, index=[0])
