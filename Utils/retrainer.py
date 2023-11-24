@@ -35,7 +35,7 @@ def clean_tweets(df):
     )
     #Remove emojis
     df.loc[:, 'tweet'] = df.tweet.str.strip() #Trim leading and trailing whitespaces
-    df=remove_stopwords(df)
+    #df=remove_stopwords(df)
     return df
     
 def lstm_process(X):

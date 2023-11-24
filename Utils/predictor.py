@@ -4,8 +4,9 @@ from . import retrainer
 
 def predictA(X):
     model=pickle.load(open('model_a.pkl','rb'))
-    mat=retrainer.lstm_process(X)
-    prediction=model.predict(mat)
+    #mat=retrainer.lstm_process(X)
+    prediction=model.predict(X)
+    #return prediction
     if prediction==0: return "Not Offensive"
     else: return "Offensive"
 
@@ -13,10 +14,11 @@ def predictB(X):
     notoff=predictA(X)
     if notoff=="Not Offensive":
         return notoff
-    mat=retrainer.lstm_process(X)
+    #mat=retrainer.lstm_process(X)
     model=pickle.load(open('model_b.pkl','rb'))
-    prediction=model.predict(mat)
-    if prediction==0: return "Directed"
+    prediction=model.predict(X)
+    #return prediction
+    if prediction<0.5: return "Directed"
     else: return "Undirected"
 
 def predictC(X):

@@ -3,8 +3,8 @@ from Utils import predictor, retrainer
 
 
 def main():
-    st.title("Tweet Classification App")
-    tweet_input = st.text_area("Enter your tweet:")
+    st.title("Is this tweet toxic?")
+    tweet_input = st.text_area("Enter a tweet to check if its offensive or not:")
     classification_method = st.radio("Select classification method:", ['A', 'B', 'C'])
 
     if st.button("Classify"):
@@ -13,6 +13,10 @@ def main():
 
         # Display the result
         st.success(f"The predicted class using Method {classification_method} is: {prediction}")
+        
+    st.write("A - Offensive or Not Offensive")
+    st.write("B - Offensive and Directed or Offensive and Not Directed")
+    st.write("C - Offensive and Directed to an Individual, Offensive and Directed to a Group OR Other")
 
 if __name__ == "__main__":
     main()
